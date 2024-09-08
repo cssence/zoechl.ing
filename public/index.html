@@ -15,8 +15,7 @@
 html {
 	--color: #d08ee6;
 	color: var(--color);
-	font: 400 calc(100vw / 9) / 1.15 serif;
-	user-select: none;
+	font: 100%/1.5 serif;
 }
 @media (prefers-color-scheme: light) {
 	html {
@@ -24,61 +23,74 @@ html {
 	}
 }
 body {
-	overflow: hidden;
-	display: grid;
-	place-items: center;
-	block-size: 100dvh;
 	margin: 0;
-	padding: 0;
+	margin-block-end: 1lh;
 }
 h1 {
+	overflow: hidden;
+	display: grid;
+	position: relative;
+	place-items: center;
+	block-size: calc(100dvh - 2lh);
+	margin: 0;
 	font: inherit;
 }
-@media (forced-colors: none) {
-	h1 {
-		text-shadow:
-			-9ch min(-40dvh, -5lh) currentColor,
-			-9ch min(-32dvh, -4lh) currentColor,
-			-9ch min(-24dvh, -3lh) currentColor,
-			-9ch min(-16dvh, -2lh) currentColor,
-			-9ch min(-8dvh, -1lh) currentColor,
-			-9ch 0 currentColor,
-			-9ch max(8dvh, 1lh) currentColor,
-			-9ch max(16dvh, 2lh) currentColor,
-			-9ch max(24dvh, 3lh) currentColor,
-			-9ch max(32dvh, 4lh) currentColor,
-			-9ch max(40dvh, 5lh) currentColor,
-			0 min(-40dvh, -5lh) currentColor,
-			0 min(-32dvh, -4lh) currentColor,
-			0 min(-24dvh, -3lh) currentColor,
-			0 min(-16dvh, -2lh) currentColor,
-			0 min(-8dvh, -1lh) currentColor,
-			0 max(8dvh, 1lh) currentColor,
-			0 max(16dvh, 2lh) currentColor,
-			0 max(24dvh, 3lh) currentColor,
-			0 max(32dvh, 4lh) currentColor,
-			0 max(40dvh, 5lh) currentColor,
-			9ch min(-40dvh, -5lh) currentColor,
-			9ch min(-32dvh, -4lh) currentColor,
-			9ch min(-24dvh, -3lh) currentColor,
-			9ch min(-16dvh, -2lh) currentColor,
-			9ch min(-8dvh, -1lh) currentColor,
-			9ch 0 currentColor,
-			9ch max(8dvh, 1lh) currentColor,
-			9ch max(16dvh, 2lh) currentColor,
-			9ch max(24dvh, 3lh) currentColor,
-			9ch max(32dvh, 4lh) currentColor,
-			9ch max(40dvh, 5lh) currentColor;
-	}
-	h1:after {
-		content: "";
-		position: absolute;
-		inset: 0;
-		background: radial-gradient(closest-side, transparent 50%, Canvas 99%);
-	}
-	mark {
-		background-color: transparent;
-		color: CanvasText;
+a {
+	color: inherit;
+	font-size: calc(100vw / 9);
+	line-height: 1.15;
+	text-decoration: none;
+	text-shadow:
+		-9ch min(-40dvh, -5lh) currentColor,
+		-9ch min(-32dvh, -4lh) currentColor,
+		-9ch min(-24dvh, -3lh) currentColor,
+		-9ch min(-16dvh, -2lh) currentColor,
+		-9ch min(-8dvh, -1lh) currentColor,
+		-9ch 0 currentColor,
+		-9ch max(8dvh, 1lh) currentColor,
+		-9ch max(16dvh, 2lh) currentColor,
+		-9ch max(24dvh, 3lh) currentColor,
+		-9ch max(32dvh, 4lh) currentColor,
+		-9ch max(40dvh, 5lh) currentColor,
+		0 min(-40dvh, -5lh) currentColor,
+		0 min(-32dvh, -4lh) currentColor,
+		0 min(-24dvh, -3lh) currentColor,
+		0 min(-16dvh, -2lh) currentColor,
+		0 min(-8dvh, -1lh) currentColor,
+		0 max(8dvh, 1lh) currentColor,
+		0 max(16dvh, 2lh) currentColor,
+		0 max(24dvh, 3lh) currentColor,
+		0 max(32dvh, 4lh) currentColor,
+		0 max(40dvh, 5lh) currentColor,
+		9ch min(-40dvh, -5lh) currentColor,
+		9ch min(-32dvh, -4lh) currentColor,
+		9ch min(-24dvh, -3lh) currentColor,
+		9ch min(-16dvh, -2lh) currentColor,
+		9ch min(-8dvh, -1lh) currentColor,
+		9ch 0 currentColor,
+		9ch max(8dvh, 1lh) currentColor,
+		9ch max(16dvh, 2lh) currentColor,
+		9ch max(24dvh, 3lh) currentColor,
+		9ch max(32dvh, 4lh) currentColor,
+		9ch max(40dvh, 5lh) currentColor;
+}
+a:focus {
+	outline: none;
+}
+a:after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(closest-side, transparent 50%, Canvas 99%);
+}
+b {
+	color: CanvasText;
+	font-weight: inherit;
+}
+@media (forced-colors: active) {
+	b {
+		background-color: Mark;
+		color: MarkText;
 	}
 }
 form,
@@ -95,27 +107,34 @@ p {
 	overflow: hidden;
 	position: absolute;
 	z-index: 1;
-	block-size: 1px;
-	aspect-ratio: 1;
-	margin: -1px;
-	clip: rect(0,0,0,0);
-	border: 0;
-	white-space: nowrap;
+	inset-block-start: 100dvh;
+	inset-inline-start: 0;
+	inline-size: 100%;
+	margin: 0;
+	padding: calc(.5lh - 1px);
+	border-block-start: 1px solid;
+	background-color: Canvas;
+	color: CanvasText;
+	font-family: sans-serif;
+	text-align: center;
+	text-wrap: balance;
+	transform: translateY(-100%);
 }
 </style>
 </head>
 <body>
-<h1 aria-hidden="true"><mark>zoechl</mark>.ing</h1>
-<p><b>Z O E C H L dot I N G</b></p>
+<h1><a href="https://zoechl.ing" aria-label="Z O E C H L dot I N G"><b>zoechl</b>.ing</a></h1>
 <p>Web space for people with last name “Zöchling”.</p>
 <script type="module">
 	const forcedColors = matchMedia('(forced-colors:active)');
+	document.querySelector('a').addEventListener('click', (event) => event.preventDefault());
 	const toggleForm = (event) => {
 		if (event.matches) {
 			document.querySelector('form')?.remove();
 		} else {
 			const color = getComputedStyle(document.documentElement).getPropertyValue('--color');
-			document.querySelector('body').insertAdjacentHTML('beforeend', `<form><input type="color" id="color" name="color" value="${color}" aria-label="Color"></form>`);
+			document.querySelector('body').insertAdjacentHTML('beforeend', `<form hidden><input type="color" id="color" name="color" value="${color}" aria-hidden="true"></form>`);
+			document.querySelector('a').addEventListener('click', (event) => document.querySelector('input').click());
 			document.querySelector('input').addEventListener('change', (event) => document.querySelector(':root').style.setProperty('--color', document.querySelector('input').value));
 		}
 	}
