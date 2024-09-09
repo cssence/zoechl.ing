@@ -1,0 +1,12 @@
+{
+  "name": "zoechl.ing",
+  "version": "0.1.0",
+  "license": "CC-BY-4.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cssence/zoechl.ing.git"
+  },
+  "scripts": {
+    "start": "http-server -c-1 -p 8090"
+  }
+}

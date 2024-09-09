@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title lang="de">Zöchling</title>
+<meta name="description" content="Web space for people with last name “Zöchling”.">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#b044d5">
+<style>
+* {
+	box-sizing: border-box;
+}
+html {
+	--color: #d08ee6;
+	color: var(--color);
+	font: 400 calc(100vw / 9) / 1.15 serif;
+	user-select: none;
+}
+@media (prefers-color-scheme: light) {
+	html {
+		--color: #8927aa;
+	}
+}
+body {
+	overflow: hidden;
+	display: grid;
+	place-items: center;
+	block-size: 100dvh;
+	margin: 0;
+	padding: 0;
+}
+h1 {
+	font: inherit;
+}
+@media (forced-colors: none) {
+	h1 {
+		text-shadow:
+			-9ch min(-40dvh, -5lh) currentColor,
+			-9ch min(-32dvh, -4lh) currentColor,
+			-9ch min(-24dvh, -3lh) currentColor,
+			-9ch min(-16dvh, -2lh) currentColor,
+			-9ch min(-8dvh, -1lh) currentColor,
+			-9ch 0 currentColor,
+			-9ch max(8dvh, 1lh) currentColor,
+			-9ch max(16dvh, 2lh) currentColor,
+			-9ch max(24dvh, 3lh) currentColor,
+			-9ch max(32dvh, 4lh) currentColor,
+			-9ch max(40dvh, 5lh) currentColor,
+			0 min(-40dvh, -5lh) currentColor,
+			0 min(-32dvh, -4lh) currentColor,
+			0 min(-24dvh, -3lh) currentColor,
+			0 min(-16dvh, -2lh) currentColor,
+			0 min(-8dvh, -1lh) currentColor,
+			0 max(8dvh, 1lh) currentColor,
+			0 max(16dvh, 2lh) currentColor,
+			0 max(24dvh, 3lh) currentColor,
+			0 max(32dvh, 4lh) currentColor,
+			0 max(40dvh, 5lh) currentColor,
+			9ch min(-40dvh, -5lh) currentColor,
+			9ch min(-32dvh, -4lh) currentColor,
+			9ch min(-24dvh, -3lh) currentColor,
+			9ch min(-16dvh, -2lh) currentColor,
+			9ch min(-8dvh, -1lh) currentColor,
+			9ch 0 currentColor,
+			9ch max(8dvh, 1lh) currentColor,
+			9ch max(16dvh, 2lh) currentColor,
+			9ch max(24dvh, 3lh) currentColor,
+			9ch max(32dvh, 4lh) currentColor,
+			9ch max(40dvh, 5lh) currentColor;
+	}
+	h1:after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(closest-side, transparent 50%, Canvas 99%);
+	}
+	mark {
+		background-color: transparent;
+		color: CanvasText;
+	}
+}
+form,
+input {
+	position: absolute;
+	inset: 0;
+}
+input {
+	block-size: auto;
+	inline-size: auto;
+	opacity: 0;
+}
+p {
+	overflow: hidden;
+	position: absolute;
+	z-index: 1;
+	block-size: 1px;
+	aspect-ratio: 1;
+	margin: -1px;
+	clip: rect(0,0,0,0);
+	border: 0;
+	white-space: nowrap;
+}
+</style>
+</head>
+<body>
+<h1 aria-hidden="true"><mark>zoechl</mark>.ing</h1>
+<p><b>Z O E C H L dot I N G</b></p>
+<p>Web space for people with last name “Zöchling”.</p>
+<script type="module">
+	const forcedColors = matchMedia('(forced-colors:active)');
+	const toggleForm = (event) => {
+		if (event.matches) {
+			document.querySelector('form')?.remove();
+		} else {
+			const color = getComputedStyle(document.documentElement).getPropertyValue('--color');
+			document.querySelector('body').insertAdjacentHTML('beforeend', `<form><input type="color" id="color" name="color" value="${color}" aria-label="Color"></form>`);
+			document.querySelector('input').addEventListener('change', (event) => document.querySelector(':root').style.setProperty('--color', document.querySelector('input').value));
+		}
+	}
+	forcedColors.addEventListener('change', toggleForm);
+	toggleForm(forcedColors);
+</script>
+</body>
+</html>

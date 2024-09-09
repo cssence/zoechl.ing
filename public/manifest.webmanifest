@@ -1,0 +1,17 @@
+{
+	"lang": "en",
+	"name": "zoechl.ing",
+	"short_name": "Zöchling",
+	"icons": [
+		{
+			"src": "/favicon.png",
+			"type": "image/png",
+			"sizes": "192x192",
+			"purpose": "maskable"
+		}
+	],
+	"start_url": "/",
+	"display": "browser",
+	"background_color": "#000000",
+	"theme_color": "#b044d5"
+}
