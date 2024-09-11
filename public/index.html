@@ -9,18 +9,14 @@
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#b044d5">
 <style>
-* {
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
 }
 html {
-	--color: #d08ee6;
-	color: var(--color);
+	--color: light-dark(#8927aa, #d08ee6);
 	font: 100%/1.5 serif;
-}
-@media (prefers-color-scheme: light) {
-	html {
-		--color: #8927aa;
-	}
 }
 body {
 	margin: 0;
@@ -35,43 +31,43 @@ h1 {
 	font: inherit;
 }
 a {
-	color: inherit;
+	color: CanvasText;
 	font-size: calc(100vw / 9);
 	line-height: 1.15;
 	text-decoration: none;
 	text-shadow:
-		-9ch min(-40svh, -5lh) currentColor,
-		-9ch min(-32svh, -4lh) currentColor,
-		-9ch min(-24svh, -3lh) currentColor,
-		-9ch min(-16svh, -2lh) currentColor,
-		-9ch min(-8svh, -1lh) currentColor,
-		-9ch 0 currentColor,
-		-9ch max(8svh, 1lh) currentColor,
-		-9ch max(16svh, 2lh) currentColor,
-		-9ch max(24svh, 3lh) currentColor,
-		-9ch max(32svh, 4lh) currentColor,
-		-9ch max(40svh, 5lh) currentColor,
-		0 min(-40svh, -5lh) currentColor,
-		0 min(-32svh, -4lh) currentColor,
-		0 min(-24svh, -3lh) currentColor,
-		0 min(-16svh, -2lh) currentColor,
-		0 min(-8svh, -1lh) currentColor,
-		0 max(8svh, 1lh) currentColor,
-		0 max(16svh, 2lh) currentColor,
-		0 max(24svh, 3lh) currentColor,
-		0 max(32svh, 4lh) currentColor,
-		0 max(40svh, 5lh) currentColor,
-		9ch min(-40svh, -5lh) currentColor,
-		9ch min(-32svh, -4lh) currentColor,
-		9ch min(-24svh, -3lh) currentColor,
-		9ch min(-16svh, -2lh) currentColor,
-		9ch min(-8svh, -1lh) currentColor,
-		9ch 0 currentColor,
-		9ch max(8svh, 1lh) currentColor,
-		9ch max(16svh, 2lh) currentColor,
-		9ch max(24svh, 3lh) currentColor,
-		9ch max(32svh, 4lh) currentColor,
-		9ch max(40svh, 5lh) currentColor;
+		-9ch min(-40svh, -5lh),
+		-9ch min(-32svh, -4lh),
+		-9ch min(-24svh, -3lh),
+		-9ch min(-16svh, -2lh),
+		-9ch min(-8svh, -1lh),
+		-9ch 0,
+		-9ch max(8svh, 1lh),
+		-9ch max(16svh, 2lh),
+		-9ch max(24svh, 3lh),
+		-9ch max(32svh, 4lh),
+		-9ch max(40svh, 5lh),
+		0 min(-40svh, -5lh),
+		0 min(-32svh, -4lh),
+		0 min(-24svh, -3lh),
+		0 min(-16svh, -2lh),
+		0 min(-8svh, -1lh),
+		0 max(8svh, 1lh),
+		0 max(16svh, 2lh),
+		0 max(24svh, 3lh),
+		0 max(32svh, 4lh),
+		0 max(40svh, 5lh),
+		9ch min(-40svh, -5lh),
+		9ch min(-32svh, -4lh),
+		9ch min(-24svh, -3lh),
+		9ch min(-16svh, -2lh),
+		9ch min(-8svh, -1lh),
+		9ch 0,
+		9ch max(8svh, 1lh),
+		9ch max(16svh, 2lh),
+		9ch max(24svh, 3lh),
+		9ch max(32svh, 4lh),
+		9ch max(40svh, 5lh);
 }
 a:focus {
 	outline: none;
@@ -83,12 +79,15 @@ a:after {
 	background: radial-gradient(closest-side, transparent 50%, Canvas 99%);
 }
 b {
-	color: CanvasText;
+	display: inline-block;
+	color: var(--color);
 	font-weight: inherit;
+	forced-color-adjust: none;
 }
 @media (forced-colors: active) {
 	b {
-		background-color: Mark;
+		--color: Mark;
+		background-color: var(--color);
 		color: MarkText;
 	}
 }
@@ -103,8 +102,6 @@ input {
 	opacity: 0;
 }
 p {
-	z-index: 1;
-	inline-size: 100%;
 	margin: 0;
 	padding-inline: 2ch;
 	padding-block: .5lh;
@@ -118,23 +115,33 @@ p {
 </style>
 </head>
 <body>
-<h1><a href="https://zoechl.ing" aria-label="Z O E C H L dot I N G"><b>zoechl</b>.ing</a></h1>
+<h1><a href="https://zoechl.ing" aria-label="Z O E C H L dot I N G">zoechl<b>.ing</b></a></h1>
 <p>Web space for people with last name “Zöchling”.</p>
 <script type="module">
-	const forcedColors = matchMedia('(forced-colors:active)');
-	document.querySelector('a').addEventListener('click', (event) => event.preventDefault());
-	const toggleForm = (event) => {
-		if (event.matches) {
-			document.querySelector('form')?.remove();
-		} else {
-			const color = getComputedStyle(document.documentElement).getPropertyValue('--color');
-			document.querySelector('body').insertAdjacentHTML('beforeend', `<form hidden><input type="color" id="color" name="color" value="${color}" aria-hidden="true"></form>`);
-			document.querySelector('a').addEventListener('click', (event) => document.querySelector('input').click());
-			document.querySelector('input').addEventListener('change', (event) => document.querySelector(':root').style.setProperty('--color', document.querySelector('input').value));
+	let color = getComputedStyle(document.querySelector('b')).getPropertyValue('--color');
+	if (!color.startsWith('#')) {
+		const rgba = ((name) => {
+			const canvas = document.createElement('canvas');
+			const context = canvas.getContext('2d');
+			context.fillStyle = name;
+			context.fillRect(0,0,1,1);
+			return context.getImageData(0,0,1,1).data;
+		})(color);
+		color = '#';
+		for (let i = 0; i < 3; i +=1 ) {
+			color += Number(rgba[i]).toString(16).padStart(2, '0');
 		}
 	}
-	forcedColors.addEventListener('change', toggleForm);
-	toggleForm(forcedColors);
+	document.querySelector('script').insertAdjacentHTML('beforebegin', `<form hidden><input type="color" id="color" name="color" value="${color}" aria-hidden="true"></form>`);
+	const input = document.querySelector('input');
+	document.querySelector('a').addEventListener('click', (event) => {
+		event.preventDefault();
+		input.click();
+	});
+	input.addEventListener('change', (event) => {
+		document.querySelector(':root').style.setProperty('--color', input.value);
+		document.querySelector('b').style.setProperty('--color', input.value);
+	});
 </script>
 </body>
 </html>
